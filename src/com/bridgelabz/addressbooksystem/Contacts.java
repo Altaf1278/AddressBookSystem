@@ -18,11 +18,6 @@ public class Contacts {
 		this.email = email;
 	}
 
-	public void show() {
-		System.out.println(this.firstName + "" + this.lastName + "" + this.address + "" + this.city + "" + this.state
-				+ "" + this.email + "" + this.zip + "" + this.phoneNumber);
-
-	}
 
 	public String getFirstName() {
 		return firstName;
