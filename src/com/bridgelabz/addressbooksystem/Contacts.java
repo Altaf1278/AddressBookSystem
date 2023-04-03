@@ -18,7 +18,6 @@ public class Contacts {
 		this.email = email;
 	}
 
-
 	public String getFirstName() {
 		return firstName;
 	}
