@@ -13,6 +13,7 @@ public class AddressBookMain {
 			System.out.println("Enter 2 to display all contacts");
 			System.out.println("Enter 3 to edit a contact");
 			System.out.println("Enter 4 to delete a contact");
+			System.out.println("Enter 5 to Quit");
 			System.out.println("Enter 0 to exit");
 			int choice = scanner.nextInt();
 			scanner.nextLine();
@@ -35,12 +36,14 @@ public class AddressBookMain {
 				addressBook.editContact(firstName, lastName);
 				break;
 			case 4:
-			    System.out.println("Enter the first name of the contact to delete:");
-			    String firstName1 = scanner.nextLine();
-			    System.out.println("Enter the last name of the contact to delete:");
-			    String lastName1 = scanner.nextLine();
-			    addressBook.deleteContact(firstName1, lastName1);
-			    break;
+				System.out.println("Enter the first name of the contact to delete:");
+				String firstName1 = scanner.nextLine();
+				System.out.println("Enter the last name of the contact to delete:");
+				String lastName1 = scanner.nextLine();
+				addressBook.deleteContact(firstName1, lastName1);
+				break;
+			case 5:
+				System.exit(0);
 			default:
 				System.out.println(" Contact details not found. ");
 			}
