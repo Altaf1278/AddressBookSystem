@@ -116,6 +116,24 @@ public class AddressBookSystem extends Contacts {
 	        }
 	    }
 	}
+	public void searchContactsByCityOrState() {
+	    System.out.println("Enter City or State to search contacts: ");
+	    String cityOrState = scanner.nextLine();
+	    List<Contacts> matchingContacts = new ArrayList<>();
+	    for (Contacts c : Contacts) {
+	        if (c.getCity().equalsIgnoreCase(cityOrState) || c.getState().equalsIgnoreCase(cityOrState)) {
+	            matchingContacts.add(c);
+	        }
+	    }
+	    if (matchingContacts.isEmpty()) {
+	        System.out.println("No contacts found in " + cityOrState);
+	    } else {
+	        System.out.println("Contacts found in " + cityOrState + ":");
+	        for (Contacts c : matchingContacts) {
+	            System.out.println(c);
+	        }
+	    }
+	}
 
 
 	public void displayContacts() {
