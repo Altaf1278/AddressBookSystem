@@ -18,10 +18,13 @@ public class AddressBookMain {
 			System.out.println("Enter 7 to search Contacts By State");
 			System.out.println("Enter 8 to search Contact Numbers in a City Or State");
 			System.out.println("Enter 9 to sort Contacts By Alphabetically");
-			System.out.println("Enter 10 to display all contacts");
-			System.out.println("Enter 11 to edit a contact");
-			System.out.println("Enter 12 to delete a contact");
-			System.out.println("Enter 13 to exit Address Book");
+			System.out.println("Enter 10 to sort Contacts By City");
+			System.out.println("Enter 11 to sort Contacts By State");
+			System.out.println("Enter 12 to sort Contacts By Zip");
+			System.out.println("Enter 13 to display all contacts");
+			System.out.println("Enter 14 to edit a contact");
+			System.out.println("Enter 15 to delete a contact");
+			System.out.println("Enter 16 to exit Address Book");
 
 			System.out.println("Enter 0 to exit");
 			int choice = scanner.nextInt();
@@ -60,23 +63,32 @@ public class AddressBookMain {
 				addressBook.sortContactsByName();
 				break;
 			case 10:
-				addressBook.displayContacts();
+				addressBook.sortContactsByCity();
 				break;
 			case 11:
+				addressBook.sortContactsByState();
+				break;
+			case 12:
+				addressBook.sortContactsByZip();
+				break;
+			case 13:
+				addressBook.displayContacts();
+				break;
+			case 14:
 				System.out.println("Enter the first name of the contact to edit:");
 				String firstName = scanner.nextLine();
 				System.out.println("Enter the last name of the contact to edit:");
 				String lastName = scanner.nextLine();
 				addressBook.editContact(firstName, lastName);
 				break;
-			case 12:
+			case 15:
 				System.out.println("Enter the first name of the contact to delete:");
 				String firstName1 = scanner.nextLine();
 				System.out.println("Enter the last name of the contact to delete:");
 				String lastName1 = scanner.nextLine();
 				addressBook.deleteContact(firstName1, lastName1);
 				break;
-			case 13:
+			case 16:
 				System.exit(0);
 			default:
 				System.out.println(" Contact details not found. ");

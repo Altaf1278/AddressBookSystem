@@ -204,6 +204,33 @@ public class AddressBookSystem extends Contacts {
 		Contacts.stream().sorted(FirstNameComparator).forEach(System.out::println);
 	}
 
+	public void sortContactsByCity() {
+		Collections.sort(Contacts, new Comparator<Contacts>() {
+			public int compare(Contacts c1, Contacts c2) {
+				return c1.getCity().compareTo(c2.getCity());
+			}
+		});
+		for (Contacts c : Contacts) {
+			System.out.println(c);
+		}
+	}
+
+	public void sortContactsByState() {
+		Collections.sort(Contacts, new Comparator<Contacts>() {
+			public int compare(Contacts c1, Contacts c2) {
+				return c1.getState().compareTo(c2.getState());
+			}
+		});
+		for (Contacts c : Contacts) {
+			System.out.println(c);
+		}
+	}
+
+	public void sortContactsByZip() {
+		Contacts.sort((c1, c2) -> Integer.compare(c1.getZip(), c2.getZip()));
+		Contacts.forEach(System.out::println);
+	}
+
 	public void displayContacts() {
 
 		if (Contacts.isEmpty()) {
