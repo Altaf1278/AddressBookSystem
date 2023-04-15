@@ -1,6 +1,7 @@
 package com.bridgelabz.addressbooksystem;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,52 +43,80 @@ public class AddressBookSystem extends Contacts {
 	}
 
 	public void addContacts() {
-		boolean addingContacts = true;
-		while (addingContacts) {
-			Contacts contacts = new Contacts();
-			System.out.println("Enter First Name : ");
-			String firstName = scanner.nextLine();
-			contacts.setFirstName(firstName);
+	    boolean addingContacts = true;
+	    while (addingContacts) {
+	        Contacts contacts = new Contacts();
+	        System.out.println("Enter First Name : ");
+	        String firstName = scanner.nextLine();
+	        contacts.setFirstName(firstName);
 
-			System.out.println("Enter Last Name : ");
-			String lastName = scanner.nextLine();
-			contacts.setLastName(lastName);
+	        System.out.println("Enter Last Name : ");
+	        String lastName = scanner.nextLine();
+	        contacts.setLastName(lastName);
 
-			System.out.println("Enter Address :");
-			String address = scanner.nextLine();
-			contacts.setAddress(address);
+	        // Check if a contact with the same first name and last name already exists
+	        boolean contactExists = false;
+	        for (Contacts c : Contacts) {
+	            if (c.getFirstName().equals(firstName) && c.getLastName().equals(lastName)) {
+	                contactExists = true;
+	                System.out.println("Contact with the same first name and last name already exists:");
+	                System.out.println(c);
+	                System.out.println("Do you want to update this contact? (Y/N)");
+	                String choice = scanner.nextLine();
+	                if (choice.equalsIgnoreCase("Y")) {
+	                    // Update existing contact
+	                    c.setAddress(contacts.getAddress());
+	                    c.setCity(contacts.getCity());
+	                    c.setState(contacts.getState());
+	                    c.setEmail(contacts.getEmail());
+	                    c.setZip(contacts.getZip());
+	                    c.setPhoneNumber(contacts.getPhoneNumber());
+	                    System.out.println("Contact updated successfully.");
+	                }
+	                break;
+	            }
+	        }
 
-			System.out.println("Enter City : ");
-			String city = scanner.nextLine();
-			contacts.setCity(city);
+	        // If contact does not exist, add it to the Address Book
+	        if (!contactExists) {
+	            System.out.println("Enter Address :");
+	            String address = scanner.nextLine();
+	            contacts.setAddress(address);
 
-			System.out.println("Enter State : ");
-			String state = scanner.nextLine();
-			contacts.setState(state);
+	            System.out.println("Enter City : ");
+	            String city = scanner.nextLine();
+	            contacts.setCity(city);
 
-			System.out.println("Enter Email : ");
-			String email = scanner.nextLine();
-			contacts.setEmail(email);
+	            System.out.println("Enter State : ");
+	            String state = scanner.nextLine();
+	            contacts.setState(state);
 
-			System.out.println("Enter ZIP : ");
-			int zip = scanner.nextInt();
-			scanner.nextLine(); // consume the newline character
-			contacts.setZip(zip);
+	            System.out.println("Enter Email : ");
+	            String email = scanner.nextLine();
+	            contacts.setEmail(email);
 
-			System.out.println("Enter Phone Number");
-			long phoneNumber = scanner.nextLong();
-			scanner.nextLine(); // consume the newline character
-			contacts.setPhoneNumber(phoneNumber);
+	            System.out.println("Enter ZIP : ");
+	            int zip = scanner.nextInt();
+	            scanner.nextLine(); // consume the newline character
+	            contacts.setZip(zip);
 
-			Contacts.add(contacts);
-			System.out.println("Person Information has been added successfully");
-			System.out.println("Do you want to add another person? (Y/N)");
-			String choice = scanner.nextLine();
-			if (choice.equalsIgnoreCase("N")) {
-				addingContacts = false;
-			}
-		}
+	            System.out.println("Enter Phone Number");
+	            long phoneNumber = scanner.nextLong();
+	            scanner.nextLine(); // consume the newline character
+	            contacts.setPhoneNumber(phoneNumber);
+
+	            Contacts.add(contacts);
+	            System.out.println("Person Information has been added successfully");
+	        }
+
+	        System.out.println("Do you want to add another person? (Y/N)");
+	        String choice = scanner.nextLine();
+	        if (choice.equalsIgnoreCase("N")) {
+	            addingContacts = false;
+	        }
+	    }
 	}
+
 
 	public void displayContacts() {
 
@@ -171,3 +200,4 @@ public class AddressBookSystem extends Contacts {
 	}
 
 }
+	
