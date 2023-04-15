@@ -170,6 +170,34 @@ public class AddressBookSystem extends Contacts {
 		}
 	}
 
+	public void searchContactNumbersByCityOrState() {
+		System.out.println("Enter City or State to search contacts: ");
+		String cityOrState = scanner.nextLine();
+
+		int countByCity = 0;
+		int countByState = 0;
+
+		for (Contacts c : Contacts) {
+			if (c.getCity().equalsIgnoreCase(cityOrState)) {
+				countByCity++;
+			}
+			if (c.getState().equalsIgnoreCase(cityOrState)) {
+				countByState++;
+			}
+		}
+
+		if (countByCity == 0 && countByState == 0) {
+			System.out.println("No contacts found in " + cityOrState);
+		} else {
+			if (countByCity > 0) {
+				System.out.println("Number of contacts found in " + cityOrState + " city: " + countByCity);
+			}
+			if (countByState > 0) {
+				System.out.println("Number of contacts found in " + cityOrState + " state: " + countByState);
+			}
+		}
+	}
+
 	public void displayContacts() {
 
 		if (Contacts.isEmpty()) {
