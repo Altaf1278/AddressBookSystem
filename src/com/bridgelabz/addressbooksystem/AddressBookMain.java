@@ -8,23 +8,32 @@ public class AddressBookMain {
 		AddressBookSystem addressBook = new AddressBookSystem();
 		Scanner scanner = new Scanner(System.in);
 
+		addressBook.addAddressBook();
+		addressBook.addContacts();
+
+		// Writing the address book to a file
+		addressBook.writeToFile("address_book.txt");
+
+		// Reading the address book from a file
+		addressBook.readFromFile("address_book.txt");
+
 		while (true) {
 			System.out.println("Enter 1 to add Address Book");
-			System.out.println("Enter 2 to display Address Book");
+			System.out.println("Enter 2 to display Address Books");
 			System.out.println("Enter 3 to open Address Book");
 			System.out.println("Enter 4 to add contact");
-			System.out.println("Enter 5 to search Contacts By City Or State");
-			System.out.println("Enter 6 to search & view Contacts By City");
-			System.out.println("Enter 7 to search Contacts By State");
-			System.out.println("Enter 8 to search Contact Numbers in a City Or State");
-			System.out.println("Enter 9 to sort Contacts By Alphabetically");
-			System.out.println("Enter 10 to sort Contacts By City");
-			System.out.println("Enter 11 to sort Contacts By State");
-			System.out.println("Enter 12 to sort Contacts By Zip");
+			System.out.println("Enter 5 to search contacts by city or state");
+			System.out.println("Enter 6 to view contacts by city");
+			System.out.println("Enter 7 to view contacts by state");
+			System.out.println("Enter 8 to search contact numbers in a city or state");
+			System.out.println("Enter 9 to sort contacts by name");
+			System.out.println("Enter 10 to sort contacts by city");
+			System.out.println("Enter 11 to sort contacts by state");
+			System.out.println("Enter 12 to sort contacts by zip");
 			System.out.println("Enter 13 to display all contacts");
 			System.out.println("Enter 14 to edit a contact");
 			System.out.println("Enter 15 to delete a contact");
-			System.out.println("Enter 16 to exit Address Book");
+			System.out.println("Enter 17 to exit Address Book");
 
 			System.out.println("Enter 0 to exit");
 			int choice = scanner.nextInt();
@@ -48,7 +57,6 @@ public class AddressBookMain {
 				break;
 			case 5:
 				addressBook.searchContactsByCityOrState();
-
 				break;
 			case 6:
 				addressBook.viewPersonByCity();
@@ -91,7 +99,7 @@ public class AddressBookMain {
 			case 16:
 				System.exit(0);
 			default:
-				System.out.println(" Contact details not found. ");
+				System.out.println("Invalid input. Please try again.");
 			}
 		}
 	}

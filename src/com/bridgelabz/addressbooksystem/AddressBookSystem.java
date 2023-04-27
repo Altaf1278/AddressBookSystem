@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.io.*;
 
 public class AddressBookSystem extends Contacts {
 
@@ -312,4 +313,39 @@ public class AddressBookSystem extends Contacts {
 		}
 	}
 
+	public void writeToFile(String filename) {
+		try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+			for (Contacts person : Contacts) {
+				writer.println(person.getFirstName() + "\n" + person.getLastName() + "\n" + person.getAddress() + "\n"
+						+ person.getCity() + "\n" + person.getState() + "\n" + person.getZip() + " \n " + person.getPhoneNumber()
+						+ "\n" + person.getEmail());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void readFromFile(String filename) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				String[] tokens = line.split(",");
+				if (tokens.length == 7) {
+					String firstName = tokens[0];
+					String lastName = tokens[1];
+					String email = tokens[2];
+					String address = tokens[3];
+					long phoneNumber = Long.parseLong(tokens[4]);
+					int zip = Integer.parseInt(tokens[5]);
+					String city = tokens[6];
+
+					Contacts person = new Contacts();
+					addContacts();
+
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
