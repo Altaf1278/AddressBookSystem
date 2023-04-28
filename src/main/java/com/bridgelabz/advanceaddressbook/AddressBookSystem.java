@@ -3,6 +3,7 @@ package com.bridgelabz.advanceaddressbook;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import com.google.gson.Gson;
 
 public class AddressBookSystem extends Contacts {
 
@@ -395,6 +398,40 @@ public class AddressBookSystem extends Contacts {
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
+	}
+
+	public void writeIntoJson() throws IOException {
+		Gson gson = new Gson();
+		FileWriter fileWriter = new FileWriter(
+				"C:\\Users\\altaf\\eclipse-workspace\\AdvanceAddressBook\\src\\main\\java\\com\\bridgelabz\\advanceaddressbook\\JsonFile.json");
+
+		Contacts person = new Contacts();
+		person.setFirstName("Altaf");
+		person.setLastName("Khan");
+		person.setAddress("Panvel");
+		person.setPhoneNumber(96655664);
+		person.setZip(410222);
+
+		String json = gson.toJson(person);
+
+		fileWriter.write(json);
+		fileWriter.close();
+		System.out.println(json);
+
+	}
+
+	public void readFromJson() throws FileNotFoundException {
+		Gson gson = new Gson();
+		System.out.println("Reading data from the json");
+		BufferedReader bufferedReader = new BufferedReader(new FileReader(
+				"C:\\Users\\altaf\\eclipse-workspace\\AdvanceAddressBook\\src\\main\\java\\com\\bridgelabz\\advanceaddressbook\\JsonFile.json"));
+		Contacts info = gson.fromJson(bufferedReader, Contacts.class);
+		System.out.println(" First Name:\n " + info.getFirstName());
+		System.out.println(" Last Name:\n" + info.getLastName());
+		System.out.println(" Address:\n" + info.getAddress());
+		System.out.println("Phone Number\n:" + info.getPhoneNumber());
+		System.out.println("Zip Code:\n" + info.getZip());
+
 	}
 
 }
