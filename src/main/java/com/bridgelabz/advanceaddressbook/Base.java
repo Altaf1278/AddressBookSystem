@@ -17,7 +17,7 @@ public class Base {
 
 		AddressBookSystemJDBC addressBookSystemJdbc = new AddressBookSystemJDBC();
 		addressBookSystemJdbc.retrieveData();
-
+        addressBookSystemJdbc.updateContactInformation(8);
 	}
 
 	public static Connection setUpDatabase() {
