@@ -1,5 +1,6 @@
 package com.bridgelabz.advanceaddressbook;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Driver;
@@ -17,7 +18,7 @@ public class Base {
 	private static final LocalDate startDate = null;
 	public static Connection connection;
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, IOException {
 
 		listOfDrivers();
 		setUpDatabase();
@@ -30,7 +31,8 @@ public class Base {
 		addressBookSystemJdbc.retrieveData(startDate, endDate);
 
 		addressBookSystemJdbc.getContactsCountByCityOrState("Mumbai"); // UC19
-        addressBookSystemJdbc.addContact("Rashid", "Khan", "Jamia Masjid" , "Srinagar", "Kashmir", "Rashid123khan@gmail.com", "8858863271", "768520", "My Friend", "Rashid", endDate);  //UC20
+	//	addressBookSystemJdbc.addContact("Rashid", "Khan", "Jamia Masjid", "Srinagar", "Kashmir","Rashid123khan@gmail.com", "8858863271", "768520", "My Friend", "Rashid", endDate); // UC20
+        addressBookSystemJdbc.addContactJS("Jasmine", "Mir", "Mirzapur", "Bhopal", "MP", "jas@341.com", "9056284571", "850234", "My Friend","jassi", endDate);
 	}
 
 	public static Connection setUpDatabase() {

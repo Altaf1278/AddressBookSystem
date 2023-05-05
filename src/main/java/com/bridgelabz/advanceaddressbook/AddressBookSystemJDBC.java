@@ -1,5 +1,11 @@
 package com.bridgelabz.advanceaddressbook;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -11,6 +17,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 
 public class AddressBookSystemJDBC extends Base {
 
@@ -78,7 +88,7 @@ public class AddressBookSystemJDBC extends Base {
 		return count;
 	}
 
-	public void addContact(String firstName, String lastName, String address, String city, String state, String email,
+	public void addContactJS(String firstName, String lastName, String address, String city, String state, String email,
 			String phoneNumber, String zip, String type, String name, LocalDate dateJoining) throws SQLException {
 		connection = setUpDatabase();
 		String query = "INSERT INTO addressbook (first_name, last_name, address, city, state, email, phonenumber, zip, type, name, date_joining) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -108,5 +118,34 @@ public class AddressBookSystemJDBC extends Base {
 		System.out.println("Name: " + name);
 		System.out.println("Type: " + type);
 	}
+	 private static final String SERVER_URL = "jdbc:mysql://localhost:3306/address_book_service";
 
+	    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+	    public static List<Contacts> readContacts() throws IOException {
+	        URL url = new URL(SERVER_URL);
+	        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+	        con.setRequestMethod("GET");
+
+	        if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+	            CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, Contacts.class);
+	            return objectMapper.readValue(con.getInputStream(), listType);
+	        } else {
+	            throw new RuntimeException("Failed to retrieve contacts from server: " + con.getResponseMessage());
+	        }
+	    }
+
+	    public static void writeContacts(List<Contacts> contacts) throws IOException {
+	        URL url = new URL(SERVER_URL);
+	        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+	        con.setRequestMethod("POST");
+	        con.setRequestProperty("Content-Type", "application/json");
+	        con.setDoOutput(true);
+
+	        objectMapper.writeValue(con.getOutputStream(), contacts);
+
+	        if (con.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+	            throw new RuntimeException("Failed to write contacts to server: " + con.getResponseMessage());
+	        }
+	    }
 }
