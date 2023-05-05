@@ -29,6 +29,7 @@ public class Base {
 		LocalDate endDate = LocalDate.of(2022, 12, 31);
 		addressBookSystemJdbc.retrieveData(startDate, endDate);
 
+		addressBookSystemJdbc.getContactsCountByCityOrState("Mumbai"); // UC19
 	}
 
 	public static Connection setUpDatabase() {
