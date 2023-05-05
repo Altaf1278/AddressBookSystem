@@ -1,13 +1,20 @@
 package com.bridgelabz.advanceaddressbook;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
+import java.util.List;
 
 public class Base {
 
+	private static final LocalDate startDate = null;
 	public static Connection connection;
 
 	public static void main(String[] args) throws SQLException {
@@ -16,8 +23,12 @@ public class Base {
 		setUpDatabase();
 
 		AddressBookSystemJDBC addressBookSystemJdbc = new AddressBookSystemJDBC();
-		addressBookSystemJdbc.retrieveData();
-        addressBookSystemJdbc.updateContactInformation(8);
+		addressBookSystemJdbc.retrieveData(); // UC16
+//        addressBookSystemJdbc.updateContactInformation(8);  //UC17
+		LocalDate startDate = LocalDate.of(2021, 05, 01);
+		LocalDate endDate = LocalDate.of(2022, 12, 31);
+		addressBookSystemJdbc.retrieveData(startDate, endDate);
+
 	}
 
 	public static Connection setUpDatabase() {
@@ -51,4 +62,5 @@ public class Base {
 			System.out.println("  " + driver.getClass().getName());
 		}
 	}
+
 }

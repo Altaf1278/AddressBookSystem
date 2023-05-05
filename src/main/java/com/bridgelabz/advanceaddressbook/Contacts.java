@@ -1,4 +1,7 @@
 package com.bridgelabz.advanceaddressbook;
+
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -17,16 +20,24 @@ public class Contacts {
 	private String firstName, lastName, address, city, state, email;
 	private int zip;
 	private long phoneNumber;
+	private LocalDate date_joining;
 
-	public Contacts() {
+	public Contacts(String firstName, String lastName, String address, String city, String state, String email, int zip,
+			long phoneNumber) {
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.city = city;
 		this.state = state;
+		this.email = email;
+		this.date_joining = date_joining;
 		this.zip = zip;
 		this.phoneNumber = phoneNumber;
-		this.email = email;
+	}
+
+	public Contacts() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getFirstName() {
@@ -93,13 +104,24 @@ public class Contacts {
 		this.phoneNumber = phoneNumber;
 	}
 
+	public LocalDate getDate_joining() {
+		return date_joining;
+	}
+
+	public void setDate_joining(LocalDate date_joining) {
+		this.date_joining = date_joining;
+	}
+
 	@Override
 	public String toString() {
-		return "Contacts Details :" + "\n" + "Firstname :" + firstName + "," + "Lastname :" + lastName + ','
-				+ "Address :" + address + ',' + "City :" + city + ',' + "State :" + state + ',' + "Zip :" + zip + ','
-				+ "PhoneNumber :" + phoneNumber + ',' + "Email :" + email;
+		return "Contacts [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
+				+ ", state=" + state + ", email=" + email + ", zip=" + zip + ", phoneNumber=" + phoneNumber
+				+ ", date_joining=" + date_joining + "]";
+	}
+
+	public void setId(int int1) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
-
-
