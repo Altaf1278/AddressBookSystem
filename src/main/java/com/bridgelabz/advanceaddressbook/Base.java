@@ -30,6 +30,7 @@ public class Base {
 		addressBookSystemJdbc.retrieveData(startDate, endDate);
 
 		addressBookSystemJdbc.getContactsCountByCityOrState("Mumbai"); // UC19
+        addressBookSystemJdbc.addContact("Rashid", "Khan", "Jamia Masjid" , "Srinagar", "Kashmir", "Rashid123khan@gmail.com", "8858863271", "768520", "My Friend", "Rashid", endDate);  //UC20
 	}
 
 	public static Connection setUpDatabase() {
